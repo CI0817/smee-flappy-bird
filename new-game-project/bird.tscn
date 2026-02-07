@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://dxjh4c8f6sey7"]
 
 [ext_resource type="Script" uid="uid://2jwxufh8hd3a" path="res://bird.gd" id="1_cchwj"]
-[ext_resource type="Texture2D" uid="uid://dl8jytxwcj3pj" path="res://assets/bird1.png" id="2_6ljjq"]
-[ext_resource type="Texture2D" uid="uid://fhdswev0oddh" path="res://assets/bird2.png" id="3_axl6x"]
-[ext_resource type="Texture2D" uid="uid://t7ma5b748kku" path="res://assets/bird3.png" id="4_yr30m"]
+[ext_resource type="Texture2D" uid="uid://cdj4cojw3iiqc" path="res://assets/smee_bot_animation_1.png" id="2_cchwj"]
+[ext_resource type="Texture2D" uid="uid://2a78d4qdxo5d" path="res://assets/smee_bot_animation_2.png" id="3_6ljjq"]
+[ext_resource type="Texture2D" uid="uid://b0q6v2frhokrf" path="res://assets/smee_bot_animation_3.png" id="4_axl6x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o5yp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_6ljjq")
+"texture": ExtResource("2_cchwj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_axl6x")
+"texture": ExtResource("3_6ljjq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_yr30m")
+"texture": ExtResource("4_axl6x")
 }],
 "loop": true,
 "name": &"flying",
@@ -23,8 +23,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3v35"]
-radius = 18.0
-height = 56.0
+radius = 30.0
+height = 60.0
 
 [node name="Bird" type="CharacterBody2D" unique_id=368095712]
 script = ExtResource("1_cchwj")
@@ -34,5 +34,6 @@ sprite_frames = SubResource("SpriteFrames_2o5yp")
 animation = &"flying"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1278389746]
+position = Vector2(2, -1)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_k3v35")
