@@ -27,7 +27,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer" unique_id=1641685766]
 handle_input_locally = false
-size = Vector2i(859, 936)
+size = Vector2i(864, 936)
 render_target_update_mode = 4
 script = ExtResource("1_bs17r")
 
@@ -40,7 +40,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2" unique_id=989699990]
 handle_input_locally = false
-size = Vector2i(859, 936)
+size = Vector2i(864, 936)
 render_target_update_mode = 4
 script = ExtResource("1_bs17r")
 

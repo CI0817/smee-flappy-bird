@@ -15,7 +15,7 @@ const PIPE_DELAY: int = 100
 const PIPE_RANGE : int = 200
 
 func _ready() -> void:
-	# CRITICAL FIX: Wait for the SubViewportContainer to perform its layout.
+	# Wait for the SubViewportContainer to perform its layout.
 	# The size is often (0,0) or incorrect during the very first frame.
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -34,7 +34,7 @@ func new_game():
 	$ScoreLabel.text = "SCORE: " + str(score)
 	$GameOver.hide()
 	
-	# CRITICAL FIX 2: Only delete pipes belonging to THIS player.
+	# Only delete pipes belonging to THIS player.
 	# Using "call_group" deletes the other player's pipes too, causing crashes.
 	for pipe in pipes:
 		if is_instance_valid(pipe):
