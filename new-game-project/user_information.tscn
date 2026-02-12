@@ -29,7 +29,6 @@ text = "Email:"
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="." unique_id=983119614]
-visible = false
 offset_left = 9.0
 offset_top = 153.0
 offset_right = 137.0

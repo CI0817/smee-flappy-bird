@@ -1,47 +1,48 @@
 extends Node
 
 @export var pipe_scene : PackedScene
-@export var input_action : String = "jump_p1"
+@export var input_action : String = "jump_p1" 
+
 var game_running : bool
 var game_over : bool
-var scroll # used to move images across the screen
+var scroll
 var score : int = 0
-const SCROLL_SPEED: int = 4 # slower or faster for scrolling
+const SCROLL_SPEED: int = 4
 var screen_size : Vector2i 
 var ground_height : int
 var pipes : Array
 const PIPE_DELAY: int = 100
 const PIPE_RANGE : int = 200
 var player_name: String
-var player_email: String
 
 func _ready() -> void:
-	# Wait for the SubViewportContainer to perform its layout.
-	# The size is often (0,0) or incorrect during the very first frame.
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	screen_size = get_viewport().get_visible_rect().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
+	
 	$UserInformation.initialise(screen_size)
+	
+	# Connect the start button signal
+	$UserInformation.game_start_requested.connect(start_game)
+	
 	new_game()
-	
-	
+
 func new_game():
+	# RESET STATE
 	game_running = false
 	game_over = false
-	$UserInformation.save_name_and_email()
-	player_name = $UserInformation.get_player_name()
-	var highscore = $UserInformation.get_current_player_highscore()
-	$HighscoreLabel.text = player_name + " HIGHSCORE: " + str(highscore)
-	$HighscoreLabel.show()
+	
 	score = 0
 	$ScoreLabel.text = "SCORE: " + str(score)
-	$GameOver.hide() # This is old stuff we don't use anymore
 	
+	# HIDE Game Over / SHOW Registration
+	$GameOver.hide()
+	$HighscoreLabel.hide()
+	$UserInformation.show()
 	
-	# Only delete pipes belonging to THIS player.
-	# Using "call_group" deletes the other player's pipes too, causing crashes.
+	# Clear pipes
 	for pipe in pipes:
 		if is_instance_valid(pipe):
 			pipe.queue_free()
@@ -51,22 +52,24 @@ func new_game():
 	generate_pipes()
 	$Bird.reset()
 
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(input_action):
 		if game_over == false: 
-			# Normal gameplay logic
-			if game_running == false:
-				start_game()
-			else:
+			# Only jump if the game is actually running
+			if game_running:
 				if $Bird.flying:
 					$Bird.flap()
 					check_top()
 		else:
-			# If game is over, pressing Jump will restart it!
+			# If game is over, pressing Jump triggers the reset
 			new_game()
 					
 func start_game():
+	player_name = $UserInformation.get_player_name()
+	var highscore = $UserInformation.get_current_player_highscore()
+	$HighscoreLabel.text = player_name + " HIGHSCORE: " + str(highscore)
+	$HighscoreLabel.show()
+	
 	$UserInformation.hide()
 	game_running = true
 	$Bird.flying = true
@@ -111,9 +114,10 @@ func stop_game():
 	$Bird.flying = false
 	game_running = false
 	game_over = true
-	$GameOver.hide() # This is old stuff that we don't use anymore
 	$UserInformation.save_user_data(score)
-	$UserInformation.show()
+	
+	# Show the Game Over screen so they know they died
+	$GameOver.show() 
 
 func _on_ground_hit() -> void:
 	$Bird.falling = false
