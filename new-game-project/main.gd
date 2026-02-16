@@ -1,6 +1,13 @@
 extends Node
 
 @export var pipe_scene : PackedScene
+
+# User's variables
+var player_name : String = ""
+var player_email : String = ""
+var is_logged_in : bool = false
+
+# Game's variables
 var game_running : bool
 var game_over : bool
 var scroll # used to move images across the screen
@@ -13,12 +20,14 @@ var pipes : Array
 const PIPE_DELAY: int = 100
 const PIPE_RANGE : int = 200
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
+	
+	# Connect the button signal via code to ensure it works
+	$LoginLayer/Control/VBoxContainer/PlayButton.pressed.connect(_on_play_button_pressed)
+	
 	new_game()
 
 func new_game():
@@ -39,9 +48,16 @@ func new_game():
 		$HighscoreLabel.hide()
 	else:
 		$HighscoreLabel.show()
+		
+	# Check if we need to show the login screen
+	if not is_logged_in:
+		$LoginLayer.show()
+	else:
+		$LoginLayer.hide()
 
 func _input(event: InputEvent) -> void:
-	if (game_over == false) and (event is InputEventKey):
+	# Added check: Only allow space bar if logged in and login layer is hidden
+	if is_logged_in and (game_over == false) and (event is InputEventKey):
 		if event.keycode == KEY_SPACE and event.pressed:
 			if game_running == false:
 				start_game()
@@ -49,7 +65,22 @@ func _input(event: InputEvent) -> void:
 				if $Bird.flying:
 					$Bird.flap()
 					check_top()
-					
+
+# --- NEW FUNCTION ---
+func _on_play_button_pressed() -> void:
+	var name_input = $LoginLayer/Control/VBoxContainer/NameInput
+	var email_input = $LoginLayer/Control/VBoxContainer/EmailInput
+	
+	if name_input.text != "" and email_input.text != "":
+		player_name = name_input.text
+		player_email = email_input.text
+		is_logged_in = true
+		$LoginLayer.hide()
+		# You can optionally call start_game() here immediately
+	else:
+		print("Please enter both name and email!")
+# --------------------
+
 func start_game():
 	game_running = true
 	$Bird.flying = true
@@ -65,8 +96,6 @@ func _process(_delta: float) -> void:
 		$Ground.position.x = -scroll
 		for pipe in pipes:
 			pipe.position.x -= SCROLL_SPEED
-			
-
 
 func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
@@ -83,12 +112,10 @@ func generate_pipes():
 func scored():
 	score += 1
 	$ScoreLabel.text = "SCORE: " + str(score)
-	
 
 func check_top():
 	if $Bird.position.y < 0:
 		$Bird.position.y = 0
-
 
 func bird_hit():
 	$Bird.falling = true
@@ -101,11 +128,17 @@ func stop_game():
 	game_over = true
 	$GameOver.show()
 
-
 func _on_ground_hit() -> void:
 	$Bird.falling = false
 	stop_game()
 
-
 func _on_game_over_restart() -> void:
+	# Reset the user info flag
+	is_logged_in = false
+	
+	# Clear the input field
+	$LoginLayer/Control/VBoxContainer/NameInput.text = ""
+	$LoginLayer/Control/VBoxContainer/EmailInput.text = ""
+	
+	# Call new game
 	new_game()

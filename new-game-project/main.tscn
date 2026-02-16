@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dpknet7defifu" path="res://pipe.tscn" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dkfybum1em5q" path="res://ground.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://00l5jc7ri33a" path="res://game_over.tscn" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://sdxlkp760pf3" path="res://assets/Start.png" id="7_272bh"]
 
 [node name="Main" type="Node" unique_id=1757375469]
 script = ExtResource("1_h2yge")
@@ -41,6 +42,47 @@ offset_right = 635.0
 offset_bottom = 124.0
 theme_override_font_sizes/font_size = 30
 text = "Highscore : 0"
+
+[node name="LoginLayer" type="CanvasLayer" parent="." unique_id=1991465280]
+
+[node name="Control" type="Control" parent="LoginLayer" unique_id=70779012]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoginLayer/Control" unique_id=698782722]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LoginLayer/Control/VBoxContainer" unique_id=168405477]
+layout_mode = 2
+text = "Enter Player Details"
+
+[node name="NameInput" type="LineEdit" parent="LoginLayer/Control/VBoxContainer" unique_id=1221167165]
+layout_mode = 2
+placeholder_text = "Player's Name"
+
+[node name="EmailInput" type="LineEdit" parent="LoginLayer/Control/VBoxContainer" unique_id=1066933907]
+layout_mode = 2
+placeholder_text = "Email's Username"
+
+[node name="PlayButton" type="TextureButton" parent="LoginLayer/Control/VBoxContainer" unique_id=1903022995]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("7_272bh")
 
 [connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
