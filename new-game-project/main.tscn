@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dpknet7defifu" path="res://pipe.tscn" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dkfybum1em5q" path="res://ground.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://00l5jc7ri33a" path="res://game_over.tscn" id="6_7mycd"]
-[ext_resource type="PackedScene" uid="uid://bgaxngw0i2j07" path="res://user_information.tscn" id="7_272bh"]
 
 [node name="Main" type="Node" unique_id=1757375469]
 script = ExtResource("1_h2yge")
@@ -42,8 +41,6 @@ offset_right = 635.0
 offset_bottom = 124.0
 theme_override_font_sizes/font_size = 30
 text = "Highscore : 0"
-
-[node name="UserInformation" parent="." unique_id=1979630973 instance=ExtResource("7_272bh")]
 
 [connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
