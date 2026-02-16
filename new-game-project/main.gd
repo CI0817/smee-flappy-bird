@@ -28,6 +28,13 @@ func _ready() -> void:
 	# Connect the button signal via code to ensure it works
 	$LoginLayer/Control/VBoxContainer/PlayButton.pressed.connect(_on_play_button_pressed)
 	
+	# Configure SilentWolf back-end database
+	SilentWolf.configure({
+		"api_key": "Q7jc1b1goC3cWJ29wK9KM3AeRP0vJ0w06w3N8fya",
+		"game_id": "smeeflappybird",
+		"log_level": 1
+	})
+	
 	new_game()
 
 func new_game():
@@ -130,6 +137,7 @@ func stop_game():
 
 func _on_ground_hit() -> void:
 	$Bird.falling = false
+	save_score_to_silentwolf()
 	stop_game()
 
 func _on_game_over_restart() -> void:
@@ -142,3 +150,18 @@ func _on_game_over_restart() -> void:
 	
 	# Call new game
 	new_game()
+
+func save_score_to_silentwolf():
+	# We only want to save if the score is greater than 0
+	if score > 0:
+		print("Attempting to save score...")
+		
+		# structure: save_score(player_name, score, leaderboard_name, metadata)
+		# We store the email in the 'metadata' dictionary so it doesn't show up publicly 
+		# on the leaderboard but is saved in the database.
+		var metadata = { "email": player_email }
+		
+		# "main" is the name of the leaderboard you created on the website
+		await SilentWolf.Scores.save_score(player_name, score, "main", metadata).sw_save_score_complete
+		
+		print("Score saved successfully!")
