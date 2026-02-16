@@ -41,8 +41,8 @@ func new_game():
 		$HighscoreLabel.show()
 
 func _input(event: InputEvent) -> void:
-	if (game_over == false) and (event is InputEventMouseButton):
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if (game_over == false) and (event is InputEventKey):
+		if event.keycode == KEY_SPACE and event.pressed:
 			if game_running == false:
 				start_game()
 			else:
