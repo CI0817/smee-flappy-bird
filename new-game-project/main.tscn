@@ -69,15 +69,15 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="LoginLayer/Control/VBoxContainer" unique_id=168405477]
 layout_mode = 2
-text = "Enter Player Details"
+text = "Please enter registered ID"
 
-[node name="NameInput" type="LineEdit" parent="LoginLayer/Control/VBoxContainer" unique_id=1221167165]
+[node name="SyncButton" type="Button" parent="LoginLayer/Control/VBoxContainer" unique_id=914844199]
 layout_mode = 2
-placeholder_text = "Player's Name"
+text = "Sync"
 
-[node name="EmailInput" type="LineEdit" parent="LoginLayer/Control/VBoxContainer" unique_id=1066933907]
+[node name="StudentIDInput" type="LineEdit" parent="LoginLayer/Control/VBoxContainer" unique_id=1221167165]
 layout_mode = 2
-placeholder_text = "Email's Username"
+placeholder_text = "Student ID"
 
 [node name="PlayButton" type="TextureButton" parent="LoginLayer/Control/VBoxContainer" unique_id=1903022995]
 layout_mode = 2

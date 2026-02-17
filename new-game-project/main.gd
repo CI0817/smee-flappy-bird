@@ -2,40 +2,73 @@ extends Node
 
 @export var pipe_scene : PackedScene
 
+# Dictionary to store { "studentID": { "student_name": "...", "email": "..." } }
+var local_player_registry : Dictionary = {}
+var current_student_id : String = "" # Store the ID for the save_score call later
+
 # User's variables
-var player_name : String = ""
-var player_email : String = ""
+var player_name : String = "" # Display name (from registry)
+var player_email : String = "" # Email (from registry)
 var is_logged_in : bool = false
 
 # Game's variables
+var registration_db_name : String = "registration"
+var leaderboard_db_name: String = "main"
 var game_running : bool
 var game_over : bool
-var scroll # used to move images across the screen
+var scroll 
 var score : int = 0
 var highscore : int = 0
-const SCROLL_SPEED: int = 4 # slower or faster for scrolling
+const SCROLL_SPEED: int = 4 
 var screen_size : Vector2i 
 var ground_height : int
 var pipes : Array
 const PIPE_DELAY: int = 100
 const PIPE_RANGE : int = 200
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	
-	# Connect the button signal via code to ensure it works
+	# Connect signals
 	$LoginLayer/Control/VBoxContainer/PlayButton.pressed.connect(_on_play_button_pressed)
+	$LoginLayer/Control/VBoxContainer/SyncButton.pressed.connect(fetch_registry_updates)
 	
-	# Configure SilentWolf back-end database
+	# Backend setup
 	SilentWolf.configure({
 		"api_key": "Q7jc1b1goC3cWJ29wK9KM3AeRP0vJ0w06w3N8fya",
 		"game_id": "smeeflappybird",
 		"log_level": 1
 	})
 	
+	fetch_registry_updates()
+	
 	new_game()
+
+func fetch_registry_updates():
+	print("Fetching player registry from SilentWolf...")
+	var label_ref = $LoginLayer/Control/VBoxContainer/Label
+	var original_text = label_ref.text
+	label_ref.text = "Syncing Database..."
+	
+	# Fetch top 1000 registrations
+	var sw_result = await SilentWolf.Scores.get_scores(1000, registration_db_name).sw_get_scores_complete
+	
+	if sw_result.success:
+		print("Registry fetched successfully.")
+		local_player_registry.clear()
+		
+		for entry in sw_result.scores:
+			# SilentWolf returns: { "player_name": "ID", "score": 1, "metadata": {...} }
+			var s_id = entry.player_name
+			if entry.metadata:
+				local_player_registry[s_id] = entry.metadata
+		
+		print("Loaded " + str(local_player_registry.size()) + " students.")
+		label_ref.text = "Database Synced. Enter ID."
+	else:
+		print("Failed to fetch registry: " + str(sw_result.error))
+		label_ref.text = "Sync Failed. Check Internet."
 
 func new_game():
 	game_running = false
@@ -51,19 +84,23 @@ func new_game():
 	pipes.clear()
 	generate_pipes()
 	$Bird.reset()
+	
 	if highscore == 0:
 		$HighscoreLabel.hide()
 	else:
 		$HighscoreLabel.show()
 		
-	# Check if we need to show the login screen
 	if not is_logged_in:
 		$LoginLayer.show()
+		# Clear the ID input for the next player
+		$LoginLayer/Control/VBoxContainer/StudentIDInput.text = ""
+		# Reset current ID
+		current_student_id = ""
+		$LoginLayer/Control/VBoxContainer/StudentIDInput.grab_focus()
 	else:
 		$LoginLayer.hide()
 
 func _input(event: InputEvent) -> void:
-	# Added check: Only allow space bar if logged in and login layer is hidden
 	if is_logged_in and (game_over == false) and (event is InputEventKey):
 		if event.keycode == KEY_SPACE and event.pressed:
 			if game_running == false:
@@ -73,28 +110,38 @@ func _input(event: InputEvent) -> void:
 					$Bird.flap()
 					check_top()
 
-# --- NEW FUNCTION ---
 func _on_play_button_pressed() -> void:
-	var name_input = $LoginLayer/Control/VBoxContainer/NameInput
-	var email_input = $LoginLayer/Control/VBoxContainer/EmailInput
+	var id_input_node = $LoginLayer/Control/VBoxContainer/StudentIDInput
+	var input_id = id_input_node.text.strip_edges()
 	
-	if name_input.text != "" and email_input.text != "":
-		player_name = name_input.text
-		player_email = email_input.text
+	if input_id == "":
+		print("Please enter a Student ID")
+		return
+
+	# Check our local cache
+	if local_player_registry.has(input_id):
+		# student found
+		var data = local_player_registry[input_id]
+		
+		current_student_id = input_id
+		player_name = data.get("student_name", "Unknown") # Display Name
+		player_email = data.get("email", "")
+		
+		print("Welcome " + player_name)
 		is_logged_in = true
 		$LoginLayer.hide()
-		# You can optionally call start_game() here immediately
+		start_game()
 	else:
-		print("Please enter both name and email!")
-# --------------------
+		# Student not found
+		print("ID not found! Please register at the queue station.")
+		$LoginLayer/Control/VBoxContainer/Label.text = "ID Not Found! Please Register or Sync."
 
 func start_game():
 	game_running = true
 	$Bird.flying = true
 	$Bird.flap()
 	$PipeTimer.start()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta: float) -> void:
 	if game_running:
 		scroll += SCROLL_SPEED
@@ -141,27 +188,22 @@ func _on_ground_hit() -> void:
 	stop_game()
 
 func _on_game_over_restart() -> void:
-	# Reset the user info flag
+	# Log user out so the next person can play
 	is_logged_in = false
-	
-	# Clear the input field
-	$LoginLayer/Control/VBoxContainer/NameInput.text = ""
-	$LoginLayer/Control/VBoxContainer/EmailInput.text = ""
-	
-	# Call new game
 	new_game()
 
 func save_score_to_silentwolf():
-	# We only want to save if the score is greater than 0
-	if score > 0:
-		print("Attempting to save score...")
+	if score > 0 and current_student_id != "":
+		print("Saving score for ID: " + current_student_id)
 		
-		# structure: save_score(player_name, score, leaderboard_name, metadata)
-		# We store the email in the 'metadata' dictionary so it doesn't show up publicly 
-		# on the leaderboard but is saved in the database.
-		var metadata = { "email": player_email }
+		# Store the Display Name and Email in metadata again for the main leaderboard
+		var metadata = {
+			"display_name": player_name,
+			"email": player_email
+		}
 		
-		# "main" is the name of the leaderboard you created on the website
-		await SilentWolf.Scores.save_score(player_name, score, "main", metadata).sw_save_score_complete
+		# Save to 'main' leaderboard using Student ID as the key
+		await SilentWolf.Scores.save_score(current_student_id, score, leaderboard_db_name, metadata).sw_save_score_complete
 		
-		print("Score saved successfully!")
+		print("Score saved!")
+# ----------------------------

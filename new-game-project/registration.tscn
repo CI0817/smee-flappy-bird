@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dmytesqpro60r"]
+
+[ext_resource type="Script" uid="uid://bqjosaj5nc0dr" path="res://registration.gd" id="1_urkk0"]
+
+[node name="Registration" type="Control" unique_id=823781398]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_urkk0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=301030048]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.24998
+offset_top = -104.0
+offset_right = 170.24998
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1854437019]
+layout_mode = 2
+text = "Register for Flappy Bird"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer" unique_id=1328329768]
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="IDInput" type="LineEdit" parent="VBoxContainer" unique_id=1725112047]
+layout_mode = 2
+placeholder_text = "Student ID"
+
+[node name="EmailInput" type="LineEdit" parent="VBoxContainer" unique_id=1470155589]
+layout_mode = 2
+placeholder_text = "Email"
+
+[node name="RegisterButton" type="Button" parent="VBoxContainer" unique_id=1488348630]
+layout_mode = 2
+text = "Register"
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer" unique_id=1795242824]
+layout_mode = 2
+horizontal_alignment = 1
