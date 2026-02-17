@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://c8pevmlro3pkb"]
+
+[ext_resource type="Script" uid="uid://brmbuuycb145r" path="res://leaderboard.gd" id="1_2t7te"]
+[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="1_3ilyb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ilyb"]
+bg_color = Color(0.87058824, 0.84705883, 0.58431375, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.32941177, 0.21960784, 0.2784314, 1)
+corner_detail = 4
+
+[node name="Leaderboard" type="Control" unique_id=303550460]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2t7te")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2063078601]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3ilyb")
+stretch_mode = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1048314976]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ilyb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1871528498]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1313474266]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+theme_override_font_sizes/font_size = 22
+text = "LEADERBOARD"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1443466539]
+layout_mode = 2
+
+[node name="Rank" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=813059526]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+text = "Rank"
+horizontal_alignment = 1
+
+[node name="Student" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=392102176]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+text = "Player"
+
+[node name="Score" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1626165324]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+text = "Score"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=417208440]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScoreList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=2058099846]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1395983505]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+text = "CLOSE"
+flat = true
