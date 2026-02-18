@@ -19,6 +19,9 @@ func _ready():
 		"log_level": 1
 	})
 	
+	# Wait for 0.2 seconds to let the scene tree settle
+	await get_tree().create_timer(0.2).timeout
+	
 	# Start the refresh loop
 	_refresh_loop()
 
