@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://csdp06lptgx5l"]
+
+[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="1_4emaf"]
+[ext_resource type="Script" uid="uid://iogy04uk43gr" path="res://launcher.gd" id="1_cvfd6"]
+
+[node name="Launcher" type="Control" unique_id=168438942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cvfd6")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1552679452]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4emaf")
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=447802962]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=991870178]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SMEE O-Week Flappy Bird"
+horizontal_alignment = 1
+
+[node name="RegisterButton" type="Button" parent="VBoxContainer" unique_id=2117057671]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Registration Mode"
+
+[node name="GameButton" type="Button" parent="VBoxContainer" unique_id=200408214]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Game Mode"
+
+[node name="LeaderboardButton" type="Button" parent="VBoxContainer" unique_id=314089904]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Leaderboard Mode"
+
+[connection signal="pressed" from="VBoxContainer/RegisterButton" to="." method="_on_register_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/GameButton" to="." method="_on_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LeaderboardButton" to="." method="_on_leaderboard_button_pressed"]

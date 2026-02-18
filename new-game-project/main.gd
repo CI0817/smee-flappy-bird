@@ -41,8 +41,6 @@ func _ready() -> void:
 		"log_level": 1
 	})
 	
-	fetch_registry_updates()
-	
 	new_game()
 
 func fetch_registry_updates():
