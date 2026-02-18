@@ -36,6 +36,7 @@ text = "Score : 0"
 [node name="GameOver" parent="." unique_id=330019901 instance=ExtResource("6_7mycd")]
 
 [node name="HighscoreLabel" type="Label" parent="." unique_id=747055421]
+z_index = 1
 offset_left = 338.0
 offset_top = 57.0
 offset_right = 635.0

@@ -27,7 +27,7 @@ const PIPE_DELAY: int = 100
 const PIPE_RANGE : int = 200
 
 func _ready() -> void:
-	screen_size = get_window().size
+	screen_size = get_viewport().get_visible_rect().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	
 	# Connect signals
