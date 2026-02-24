@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dkfybum1em5q"]
 
 [ext_resource type="Script" uid="uid://84ahp80271na" path="res://ground.gd" id="1_t7tip"]
-[ext_resource type="Texture2D" uid="uid://d0aqtq7m2eubj" path="res://assets/ground.png" id="1_yh8r4"]
+[ext_resource type="Texture2D" uid="uid://busv5haqrog1t" path="res://assets/breaboard_ground.png" id="2_t7tip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh8r4"]
 size = Vector2(1728, 168)
@@ -10,8 +10,9 @@ size = Vector2(1728, 168)
 script = ExtResource("1_t7tip")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1062665834]
-position = Vector2(862, 83)
-texture = ExtResource("1_yh8r4")
+position = Vector2(863, 78.928314)
+scale = Vector2(0.9988426, 1.0059526)
+texture = ExtResource("2_t7tip")
 offset = Vector2(0, 768)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1655360413]
