@@ -1,21 +1,25 @@
 [gd_scene format=3 uid="uid://dxjh4c8f6sey7"]
 
 [ext_resource type="Script" uid="uid://2jwxufh8hd3a" path="res://bird.gd" id="1_cchwj"]
-[ext_resource type="Texture2D" uid="uid://cdj4cojw3iiqc" path="res://assets/smee_bot_animation_1.png" id="2_cchwj"]
-[ext_resource type="Texture2D" uid="uid://2a78d4qdxo5d" path="res://assets/smee_bot_animation_2.png" id="3_6ljjq"]
-[ext_resource type="Texture2D" uid="uid://b0q6v2frhokrf" path="res://assets/smee_bot_animation_3.png" id="4_axl6x"]
+[ext_resource type="Texture2D" uid="uid://cip3xyxr6i3i4" path="res://assets/SMEE_PIXEL_PILOT_1.png" id="2_6ljjq"]
+[ext_resource type="Texture2D" uid="uid://bwiqowbigo1vs" path="res://assets/SMEE_PIXEL_PILOT_2.png" id="3_axl6x"]
+[ext_resource type="Texture2D" uid="uid://lxnjo2loypg8" path="res://assets/SMEE_PIXEL_PILOT_3.png" id="4_yr30m"]
+[ext_resource type="Texture2D" uid="uid://b8pkp52at0vcy" path="res://assets/SMEE_PIXEL_PILOT_4.png" id="5_2o5yp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o5yp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_cchwj")
+"texture": ExtResource("2_6ljjq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_6ljjq")
+"texture": ExtResource("3_axl6x")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_axl6x")
+"texture": ExtResource("4_yr30m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2o5yp")
 }],
 "loop": true,
 "name": &"flying",
@@ -32,6 +36,8 @@ script = ExtResource("1_cchwj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1371882646]
 sprite_frames = SubResource("SpriteFrames_2o5yp")
 animation = &"flying"
+frame = 3
+frame_progress = 0.31022516
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1278389746]
 rotation = 1.5707964

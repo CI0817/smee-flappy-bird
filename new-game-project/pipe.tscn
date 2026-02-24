@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpknet7defifu"]
 
 [ext_resource type="Script" uid="uid://d5wcxqo02hfy" path="res://pipe.gd" id="1_78010"]
-[ext_resource type="Texture2D" uid="uid://dc3x8o8vutxmu" path="res://assets/pipe.png" id="1_bepn3"]
+[ext_resource type="Texture2D" uid="uid://cb8q0vy8cybyl" path="res://assets/cap_pipe.png" id="2_78010"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78010"]
 size = Vector2(72, 524)
@@ -16,19 +16,19 @@ size = Vector2(78, 36)
 size = Vector2(78, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08mfy"]
-size = Vector2(13, 191)
+size = Vector2(13, 249)
 
 [node name="Pipe" type="Area2D" unique_id=2113757885 groups=["pipes"]]
 script = ExtResource("1_78010")
 
 [node name="Lower" type="Sprite2D" parent="." unique_id=132907681]
 position = Vector2(0, 380)
-texture = ExtResource("1_bepn3")
+texture = ExtResource("2_78010")
 
 [node name="Upper" type="Sprite2D" parent="." unique_id=1905378666]
 position = Vector2(0, -380)
 rotation = -3.1415925
-texture = ExtResource("1_bepn3")
+texture = ExtResource("2_78010")
 
 [node name="Lbody" type="CollisionShape2D" parent="." unique_id=1940051520]
 position = Vector2(0, 398)
@@ -43,15 +43,17 @@ shape = SubResource("RectangleShape2D_1uqvy")
 position = Vector2(-1.1494358e-05, -118)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_i3wvs")
+disabled = true
 
 [node name="Lhead" type="CollisionShape2D" parent="." unique_id=64872652]
 position = Vector2(0, 118)
 shape = SubResource("RectangleShape2D_arayy")
+disabled = true
 
 [node name="Score Area" type="Area2D" parent="." unique_id=416065805]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score Area" unique_id=804884719]
-position = Vector2(44, 0)
+position = Vector2(44, 0.5)
 shape = SubResource("RectangleShape2D_08mfy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
