@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cb8q0vy8cybyl" path="res://assets/cap_pipe.png" id="2_78010"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78010"]
-size = Vector2(72, 524)
+size = Vector2(72, 521)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1uqvy"]
-size = Vector2(72, 524)
+size = Vector2(72, 521)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3wvs"]
 size = Vector2(78, 36)
@@ -16,36 +16,38 @@ size = Vector2(78, 36)
 size = Vector2(78, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08mfy"]
-size = Vector2(13, 249)
+size = Vector2(13, 201)
 
 [node name="Pipe" type="Area2D" unique_id=2113757885 groups=["pipes"]]
 script = ExtResource("1_78010")
 
 [node name="Lower" type="Sprite2D" parent="." unique_id=132907681]
-position = Vector2(0, 380)
+position = Vector2(0, 356)
 texture = ExtResource("2_78010")
 
 [node name="Upper" type="Sprite2D" parent="." unique_id=1905378666]
-position = Vector2(0, -380)
+position = Vector2(0, -356)
 rotation = -3.1415925
 texture = ExtResource("2_78010")
 
 [node name="Lbody" type="CollisionShape2D" parent="." unique_id=1940051520]
-position = Vector2(0, 398)
+position = Vector2(0, 361.5)
 shape = SubResource("RectangleShape2D_78010")
 
 [node name="Ubody" type="CollisionShape2D" parent="." unique_id=54846913]
-position = Vector2(2.5463365e-05, -398)
+position = Vector2(2.2057706e-05, -361.5)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_1uqvy")
 
 [node name="Uhead" type="CollisionShape2D" parent="." unique_id=471126314]
+visible = false
 position = Vector2(-1.1494358e-05, -118)
 rotation = -3.1415925
 shape = SubResource("RectangleShape2D_i3wvs")
 disabled = true
 
 [node name="Lhead" type="CollisionShape2D" parent="." unique_id=64872652]
+visible = false
 position = Vector2(0, 118)
 shape = SubResource("RectangleShape2D_arayy")
 disabled = true
@@ -53,7 +55,7 @@ disabled = true
 [node name="Score Area" type="Area2D" parent="." unique_id=416065805]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score Area" unique_id=804884719]
-position = Vector2(44, 0.5)
+position = Vector2(44, -0.5)
 shape = SubResource("RectangleShape2D_08mfy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
