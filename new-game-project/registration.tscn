@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dmytesqpro60r"]
 
 [ext_resource type="Script" uid="uid://bqjosaj5nc0dr" path="res://registration.gd" id="1_urkk0"]
-[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="2_io0l7"]
+[ext_resource type="Texture2D" uid="uid://fvcpubkaq0px" path="res://assets/SMEE_PIXEL_BACKGROUND_RAW.png" id="2_io0l7"]
 
 [node name="Registration" type="Control" unique_id=823781398]
 layout_mode = 3

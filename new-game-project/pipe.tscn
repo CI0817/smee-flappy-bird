@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpknet7defifu"]
 
 [ext_resource type="Script" uid="uid://d5wcxqo02hfy" path="res://pipe.gd" id="1_78010"]
-[ext_resource type="Texture2D" uid="uid://cb8q0vy8cybyl" path="res://assets/cap_pipe.png" id="2_78010"]
+[ext_resource type="Texture2D" uid="uid://deausxj2osbvc" path="res://assets/SMEE_PIXEL_CAPACITOR_2_OUTLINE.png" id="2_arayy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78010"]
 size = Vector2(72, 521)
@@ -22,13 +22,15 @@ size = Vector2(13, 201)
 script = ExtResource("1_78010")
 
 [node name="Lower" type="Sprite2D" parent="." unique_id=132907681]
-position = Vector2(0, 356)
-texture = ExtResource("2_78010")
+position = Vector2(0, 361.5)
+scale = Vector2(2.1176472, 1.9225091)
+texture = ExtResource("2_arayy")
 
 [node name="Upper" type="Sprite2D" parent="." unique_id=1905378666]
-position = Vector2(0, -356)
+position = Vector2(-0.06866622, -361.11124)
 rotation = -3.1415925
-texture = ExtResource("2_78010")
+scale = Vector2(2.1351519, 1.918138)
+texture = ExtResource("2_arayy")
 
 [node name="Lbody" type="CollisionShape2D" parent="." unique_id=1940051520]
 position = Vector2(0, 361.5)

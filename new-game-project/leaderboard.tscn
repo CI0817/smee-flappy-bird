@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8pevmlro3pkb"]
 
 [ext_resource type="Script" uid="uid://brmbuuycb145r" path="res://leaderboard.gd" id="1_2t7te"]
-[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="1_3ilyb"]
+[ext_resource type="Texture2D" uid="uid://fvcpubkaq0px" path="res://assets/SMEE_PIXEL_BACKGROUND_RAW.png" id="2_2t7te"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ilyb"]
 bg_color = Color(0.87058824, 0.84705883, 0.58431375, 1)
@@ -28,8 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_3ilyb")
-stretch_mode = 6
+texture = ExtResource("2_2t7te")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1048314976]
 custom_minimum_size = Vector2(600, 500)

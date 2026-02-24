@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://csdp06lptgx5l"]
 
-[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="1_4emaf"]
 [ext_resource type="Script" uid="uid://iogy04uk43gr" path="res://launcher.gd" id="1_cvfd6"]
+[ext_resource type="Texture2D" uid="uid://fvcpubkaq0px" path="res://assets/SMEE_PIXEL_BACKGROUND_RAW.png" id="2_cvfd6"]
 
 [node name="Launcher" type="Control" unique_id=168438942]
 layout_mode = 3
@@ -19,8 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4emaf")
-stretch_mode = 6
+texture = ExtResource("2_cvfd6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=447802962]
 layout_mode = 1

@@ -27,8 +27,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k3v35"]
-radius = 18.0
-height = 56.0
+radius = 22.0
+height = 64.0
 
 [node name="Bird" type="CharacterBody2D" unique_id=368095712]
 script = ExtResource("1_cchwj")

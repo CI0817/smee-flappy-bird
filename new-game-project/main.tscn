@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Script" uid="uid://cljo0h54ukqrs" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://bam05d4x4gifa" path="res://assets/bg.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dxjh4c8f6sey7" path="res://bird.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dpknet7defifu" path="res://pipe.tscn" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://fvcpubkaq0px" path="res://assets/SMEE_PIXEL_BACKGROUND_RAW.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://dkfybum1em5q" path="res://ground.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://00l5jc7ri33a" path="res://game_over.tscn" id="6_7mycd"]
 [ext_resource type="Texture2D" uid="uid://sdxlkp760pf3" path="res://assets/Start.png" id="7_272bh"]
@@ -12,8 +12,20 @@
 script = ExtResource("1_h2yge")
 pipe_scene = ExtResource("2_lquwl")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=223904618]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -167.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_272bh")
+
 [node name="Background" type="Sprite2D" parent="." unique_id=748922460]
-texture = ExtResource("1_ig7tw")
+visible = false
+position = Vector2(-718.1666, -637.49994)
+scale = Vector2(2.6562498, 2.6562498)
+texture = ExtResource("3_272bh")
 offset = Vector2(432, 384)
 
 [node name="Bird" parent="." unique_id=368095712 instance=ExtResource("2_0xm2m")]
