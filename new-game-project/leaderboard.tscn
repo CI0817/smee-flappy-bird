@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brmbuuycb145r" path="res://leaderboard.gd" id="1_2t7te"]
 [ext_resource type="Texture2D" uid="uid://fvcpubkaq0px" path="res://assets/SMEE_PIXEL_BACKGROUND_RAW.png" id="2_2t7te"]
+[ext_resource type="FontFile" uid="uid://cwibxrfruyvss" path="res://assets/ARCADECLASSIC.TTF" id="3_oli24"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ilyb"]
 bg_color = Color(0.87058824, 0.84705883, 0.58431375, 1)
@@ -52,7 +53,8 @@ layout_mode = 2
 [node name="Title" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1313474266]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_fonts/font = ExtResource("3_oli24")
+theme_override_font_sizes/font_size = 25
 text = "LEADERBOARD"
 horizontal_alignment = 1
 
@@ -63,6 +65,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+theme_override_fonts/font = ExtResource("3_oli24")
+theme_override_font_sizes/font_size = 20
 text = "Rank"
 horizontal_alignment = 1
 
@@ -70,12 +74,16 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+theme_override_fonts/font = ExtResource("3_oli24")
+theme_override_font_sizes/font_size = 20
 text = "Player"
 
 [node name="Score" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1626165324]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8784314, 0.5019608, 0.1882353, 1)
+theme_override_fonts/font = ExtResource("3_oli24")
+theme_override_font_sizes/font_size = 20
 text = "Score"
 horizontal_alignment = 1
 

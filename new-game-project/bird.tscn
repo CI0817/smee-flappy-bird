@@ -36,7 +36,6 @@ script = ExtResource("1_cchwj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1371882646]
 sprite_frames = SubResource("SpriteFrames_2o5yp")
 animation = &"flying"
-frame = 3
 frame_progress = 0.31022516
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1278389746]
