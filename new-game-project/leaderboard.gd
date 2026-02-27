@@ -22,8 +22,52 @@ func _ready():
 	# Wait for 0.2 seconds to let the scene tree settle
 	await get_tree().create_timer(0.2).timeout
 	
+	# Export the top 100 player details to CSV file
+	export_leaderboard_to_csv()
+	
 	# Start the refresh loop
 	_refresh_loop()
+
+func export_leaderboard_to_csv():
+	print("Fetching scores for CSV export...")
+	
+	# Fetching the top 100 scores
+	var sw_result = await SilentWolf.Scores.get_scores(100, leaderboard_name).sw_get_scores_complete
+	
+	if sw_result.success:
+		var scores = sw_result.scores
+		if scores.size() > 0:
+			var file_path = "user://leaderboard_export.csv"
+			var file = FileAccess.open(file_path, FileAccess.WRITE)
+			
+			if file:
+				# Write the Header Row
+				file.store_csv_line(["Rank", "Student ID", "Score", "Name", "Email"])
+				
+				# Loop through the scores and write each row
+				for i in range(scores.size()):
+					var score_data = scores[i]
+					
+					var rank = str(i + 1)
+					var student_id = str(score_data.player_name)
+					var score = str(int(score_data.score))
+					
+					var metadata = score_data.get("metadata", {})
+					var display_name = str(metadata.get("display_name", "N/A"))
+					var email = str(metadata.get("email", "N/A"))
+					
+					file.store_csv_line([rank, student_id, score, display_name, email])
+				
+				file = null
+				
+				print("CSV Export Complete! File saved to: ", ProjectSettings.globalize_path(file_path))
+				
+				# Automatically open the folder containing the CSV file on your computer
+				OS.shell_open(OS.get_user_data_dir())
+		else:
+			print("Leaderboard is empty, nothing to export.")
+	else:
+		print("Failed to fetch scores: " + str(sw_result.error))
 
 func _refresh_loop():
 	# This loop will run as long as the Leaderboard node exists in the Scene Tree
